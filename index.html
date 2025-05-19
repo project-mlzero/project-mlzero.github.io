@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="MLZero: A Multi-Agent System for End-to-end Machine Learning Automation">
+  <meta name="keywords" content="MLZero, Multi-Agent System, Machine Learning Automation, AI">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MLZero: A Multi-Agent System for End-to-end Machine Learning Automation</title>
+
+  <link rel="icon" href="./assets/logos/autogluon.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/tool_cards.css">
+  <link rel="stylesheet" href="./static/css/top_button.css">
+  <link rel="stylesheet" href="./static/css/navbar.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/video.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
+
+  <!-- Add navbar.js script -->
+  <script src="./static/js/navbar.js"></script>
+
+  <!-- Add MathJax -->
+  <script src="./static/js/mathjax.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Add visualization.js script -->
+  <script src="./static/js/visualization.js"></script>
+</head>
+
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Add Table of Contents -->
+  <div class="toc-wrapper">
+    <h4 style="margin-bottom: 10px;">
+      <a href="#">Table of Contents</a>
+    </h4>
+    <ul class="toc-list">
+      <li><a href="#introduction">Introduction</a></li>
+      <li><a href="#visualization">Visualization</a></li>
+      <li>
+        <a href="#framework">Framework</a>
+        <!-- <div class="toc-subitem">
+          <a href="#task-specific-tool-selection">Task-Specific Tool Selection</a>
+        </div> -->
+      </li>
+      <li>
+        <a href="#results">Results</a>
+        <!-- <div class="toc-subitem">
+          <a href="#main-results">Main Results</a>
+          <a href="#ablation-study">Ablation Study</a>
+        </div> -->
+      </li>
+      <li><a href="#Share">Share</a></li>
+      <li><a href="#BibTeX">BibTeX</a></li>
+    </ul>
+  </div>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title is-bold">
+              <span style="vertical-align: middle">
+                <span style="color: var(--color-tools-blue);">ML</span><span
+                  style="color: var(--color-tools-blue);">Zero</span>
+              </span>
+            </h1>
+            <h2 class="subtitle is-3 publication-subtitle">
+              A Multi-Agent System for End-to-end Machine Learning Automation
+            </h2>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=_PA_5_kAAAAJ" target="_blank">Haoyang Fang</a>
+                <a href="mailto:haoyfang@amazon.com"><i class="fas fa-envelope"></i></a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=Prwxh24AAAAJ" target="_blank">Boran Han</a>
+                <a href="mailto:boranhan@amazon.com"><i class="fas fa-envelope"></i></a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=I0nj-TcAAAAJ" target="_blank">Nick Erickson</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=pIEuyR8AAAAJ" target="_blank">Xiyuan Zhang</a>,</span>
+              <span class="author-block">
+                <a href="https://github.com/suzhoum" target="_blank">Su Zhou</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=9isjTU8AAAAJ" target="_blank">Anirudh Dagar</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=CBmDAOEAAAAJ" target="_blank">Jiani Zhang</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=ufCuFocAAAAJ" target="_blank">Ali Caner Turkmen</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=Y3oqP5gAAAAJ" target="_blank">Tony Hu</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=yWJ9BqEAAAAJ" target="_blank">Huzefa Rangwala</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=7k_1QFIAAAAJ" target="_blank">Ying Nian Wu</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=IKUm624AAAAJ" target="_blank">Bernie Wang</a>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=ElqwScwAAAAJ" target="_blank">George Karypis</a>
+                <a href="mailto:gkarypis@amazon.com"><i class="fas fa-envelope"></i></a></span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">AWS</span><br>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <!-- <span class="link-block">
+                  <a href="https://arxiv.org/pdf/2502.11271.pdf"
+                    class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span> -->
+                <!-- arxiv link -->
+                <span class="link-block">
+                  <a href="https://arxiv.org" class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/autogluon/autogluon-assistant"
+                    class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- PyPI Link. -->
+                <span class="link-block">
+                  <a href="https://pypi.org/project/autogluon.assistant/"
+                    class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <p style="font-size:18px">📦</p>
+                    </span>
+                    <span>PyPI</span>
+                  </a>
+                </span>
+                <!-- Visualization Link. -->
+                <span class="link-block">
+                  <a href="#visualization"
+                    class="external-link button is-normal is-rounded is-dark" target="_blank">
+                    <span class="icon">
+                      <p style="font-size:18px">🔮</p>
+                    </span>
+                    <span>Visualize</span>
+                  </a>
+                </span>     
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="content has-text-centered">
+        <img src="assets/images/aga-abstract.jpg" width="100%">
+        <p style="text-align: left;">
+          MLZero: An end-to-end multi-agent system that integrates specialized perception agents 
+          with dual memory modules (semantic and episodic) to power iterative coding cycles, 
+          transforming raw data into ready-to-use models and prediction outputs with zero human intervention.
+
+          The overall framework of MLZero.
+          (1) \textbf{Perception} that interprets arbitrary data inputs and transforms them into structured context; 
+          (2) \textbf{Semantic Memory} that enriches the system with knowledge of the ML Library; 
+          (3) \textbf{Episodic Memory} that maintains chronological execution records for targeted debugging; 
+          and (4) \textbf{Iterative Coding} that implements a refinement process with feedback loops and augmented memory. 
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Introduction -->
+  <section class="section" id="introduction">
+    <div class="container" style="margin-bottom: 2vh;">
+    <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+    <h2 class="title is-3">Introduction</h2>
+    <div class="content has-text-justified">
+    <p>
+    Existing AutoML systems have advanced the automation of machine learning (ML); however, they still require substantial manual configuration and expert input, particularly when handling multimodal data. We introduce <b>MLZero</b>, a novel multi-agent framework powered by <b>Large Language Models (LLMs)</b> that enables end-to-end ML automation across diverse data modalities with minimal human intervention.
+    </p>
+    <p>
+    <b>MLZero</b> employs a cognitive perception module that transforms raw multimodal inputs into perceptual context, addressing key LLM limitations through semantic and episodic memory. Our system demonstrates superior performance on MLE-Bench Lite, securing <b>six gold medals</b> and outperforming competitors on our Multimodal AutoML Agent Benchmark with a success rate of <b>0.92 (+263.6%)</b>. <b>MLZero</b> maintains robust effectiveness even with a compact 8B LLM, outperforming full-size systems from existing solutions.
+    </p>
+    </div>
+    <div class="content has-text-justified">
+    <p>
+    Our approach integrates specialized perception agents with dual memory modules for iterative code development and error correction. <b>MLZero</b> not only overcomes limitations of previous LLM-based approaches but also represents a truly end-to-end system with superior performance across diverse machine learning tasks. Our main contributions include:
+    </p>
+    <ul style="text-align: left; margin-left: 2em;">
+      <li>A novel multi-agent system delivering high-quality end-to-end multimodal ML solutions with minimal human intervention</li>
+      <li>Superior performance on MLE-Bench Lite with more medal counts (6 gold) and higher success rate</li>
+      <li>A comprehensive benchmark suite evaluating challenging scenarios including multilingual, multitable, and zero-shot tasks</li>
+      <li>Empirical evidence showing <b>MLZero</b> outperforms existing ML agents across all metrics (<b>+263.6%</b> success rate)</li>
+      <li>Detailed ablation studies identifying key components driving performance gains</li>
+    </ul>
+    </div>
+    <div class="container is-max-desktop">
+    <div class="content has-text-centered">
+    <img src="assets/images/mlzero_table_1.png" width="80%">
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+  <!--/ Introduction -->
+
+  <!-- Framework -->
+  <section class="section" id="framework">
+    <div class="container" style="margin-bottom: 2vh;">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">The <span style="color: var(--color-ml-red);"><b>ML</b></span><span
+              style="color: var(--color-zero-blue);"><b>Zero</b></span> Framework</h2>
+          <div class="content has-text-justified">
+            <div class="container is-max-desktop">
+              <div class="content has-text-centered">
+                <img src="assets/images/agent.jpg" alt="MLZero Architecture" width="80%">
+              </div>
+            </div>
+            <p>
+              We present <span style="color: var(--color-ml-red);"><b>ML</b></span><span
+                style="color: var(--color-zero-blue);"><b>Zero</b></span>, a multi-agent system that automates 
+              end-to-end solutions for <b>multimodal ML tasks</b>. Given input data $x$ and optional user inputs 
+              $U_{\text{opt}}$, the system produces solutions including predicted outputs $y$, code 
+              artifacts $C$, and execution logs $L$:
+              $\mathcal{F}(x, U^{\text{opt}}) = (y, C, L)$.
+            </p>
+            <p>
+              Our ML model building process for various tasks is achieved by generating code employing different ML 
+              libraries and executing it. For supervised learning tasks, $x$ typically includes labeled training data, 
+              unlabeled test data, and a brief task description or instruction. For zero-shot tasks, $x$ would simply 
+              consist of unlabeled test data and the task description. Through this comprehensive system, <span 
+              style="color: var(--color-ml-red);"><b>ML</b></span><span
+              style="color: var(--color-zero-blue);"><b>Zero</b></span> effectively bridges the gap between noisy raw 
+              data inputs and sophisticated ML solutions, providing a truly end-to-end automated ML framework adaptive 
+              to any modalities.
+            </p>
+            <p>
+              Our system comprises four modules, where each module is a subsystem with one or more agents, and each 
+              agent is a specialized LLM augmented with utility functions: (1) <b>Perception</b> that interprets 
+              arbitrary data inputs and transforms them into structured context; (2) <b>Semantic Memory</b> that 
+              enriches the system with knowledge of the ML Library; (3) <b>Episodic Memory</b> that maintains 
+              chronological execution records for targeted debugging; and (4) <b>Iterative Coding</b> that implements 
+              a refinement process with feedback loops and augmented memory.
+            </p>
+          </div>
+          
+          <h3 class="title is-4">Perception Module</h3>
+          <div class="content has-text-justified">
+            <p>
+              The Perception module $\mathcal{P}$ acts as the cognitive lens of the system, orchestrating the 
+              transformation of various data inputs into actionable ML workflow specifications:
+              $\mathcal{P}(x, U^{\text{opt}}) = (P, M)$.
+              This module consists of three agents: the <b>File grouping and file perception agent</b> performs structural 
+              analysis of raw data $x$, grouping similar files and interpreting file contents; the <b>Task perception agent</b> 
+              extracts semantic information from raw data, derived context, and user input $U_{\text{opt}}$ to identify 
+              objectives, constraints, and evaluation criteria; and the <b>ML Library selection agent</b> employs context-aware 
+              reasoning to match problem characteristics with the appropriate ML Library $M$.
+            </p>
+          </div>
+          
+          <h3 class="title is-4">Semantic Memory Module</h3>
+          <div class="content has-text-justified">
+            <p>
+              The Semantic Memory Module $\mathcal{S}_t$ enhances the LLM's parametric knowledge with domain-specific 
+              information from external knowledge bases at each iteration $t$. These knowledge bases are constructed 
+              offline by two agents: the <b>summarization agent</b> compresses relevant knowledge into concise paragraphs 
+              serving as queryable indices, while the <b>condensation agent</b> transforms this knowledge into precise 
+              and streamlined guidance. At each iteration $t$, given the error context $R_t$, the Semantic Memory Module 
+              processes this information through its <b>retrieval agent</b> to query the knowledge base of the selected 
+              ML library $M$, extracting condensed information $G_t$:
+              $\mathcal{S}_t(P, M, R_t) = G_t$.
+            </p>
+          </div>
+          
+          <h3 class="title is-4">Episodic Memory Module</h3>
+          <div class="content has-text-justified">
+            <p>
+              The Episodic Memory module, $\mathcal{E}_t$, enhances the success rate of <span 
+              style="color: var(--color-ml-red);"><b>ML</b></span><span
+              style="color: var(--color-zero-blue);"><b>Zero</b></span> in ML model building by providing error 
+              context $R_t$ at each iteration $t$ leveraging its chronological record of the system execution history:
+              $\mathcal{E}_t(P, C_{t-1}, L_{t-1}, G_{t-1}, R_{t-1}) = R_t$.
+              This component is initialized with the perception context $P$ and progressively stores the interaction data 
+              at each iteration. When invoked during code generation, the <b>error analyzer agent</b> distills encountered 
+              issues and contexts into concise error summaries paired with fix suggestions, enabling subsequent coding agents 
+              to efficiently address specific problems without processing excessive contextual information.
+            </p>
+          </div>
+          
+          <h3 class="title is-4">Iterative Coding Module</h3>
+          <div class="content has-text-justified">
+            <p>
+              With the support of components above, our system enters an iterative coding process $\mathcal{G}_t$, where 
+              at each iteration $t$ it refines the solution based on execution feedback:
+              $\mathcal{G}_t(P, U^{\text{opt}}_t, R_t, G_t) = (y_t, C_t, L_t)$.
+              For each iteration $t$, the system first combines the perceptual context $P$, optional user input 
+              $U^{\text{opt}}_t$, error context $R_t$, and the retrieved knowledge $G_t$ to guide the <b>coder agent</b> 
+              in producing executable code $C_t$. The system then executes the generated code in a configured environment, 
+              capturing logs $L_t$ and stores the model output $y_t$. The <b>executer agent</b> analyzes these results and 
+              logs to determine the next steps: finalizing output upon success or identifying errors and initiating the next 
+              coding iteration.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ Framework -->
+
+
+  <section class="section" id="results">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Experimental Results</h2>
+          <h3 class="title is-4">Main Results: Comprehensive Evaluation</h3>
+          <div class="content has-text-justified">
+            <p>
+              To evaluate the effectiveness of <span style="color: var(--color-ml-blue);"><b>ML</b></span><span
+                style="color: var(--color-zero-green);"><b>Zero</b></span>, we conducted extensive experiments across multiple benchmarks and datasets. Our evaluations span <b>two primary benchmarks</b>: MLE-bench Lite with <b>21 diverse Kaggle competitions</b> and the Multimodal AutoML Agent Benchmark with <b>25 diverse datasets</b> covering various modalities and ML tasks.
+            </p>
+  
+            <div id="results-carousel" class="carousel results-carousel">
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="assets/images/mlebench_vis.jpg" alt="MLEbench Results" width="90%">
+                  <p>Performance comparison on MLEbench-Lite. <span style="color: var(--color-ml-blue);"><b>ML</b></span><span style="color: var(--color-zero-green);"><b>Zero</b></span> demonstrates superior performance with an average rank of 1.43, significantly outperforming competing approaches including AIDE (2.36), ResearchAgent (MLAB) (3.29), and CodeActAgent (OpenHands) (2.93). <span style="color: var(--color-ml-blue);"><b>ML</b></span><span style="color: var(--color-zero-green);"><b>Zero</b></span> achieves the highest success rate of 86% on MLEbench-Lite, compared to AIDE (81%), MLAB (62%), and OpenHands (71%), while also outperforming competitors in medal counts with six gold and two silver medals.
+                  </p>
+                </div>
+              </div>
+  
+              <div class="box m-5">
+                <div class="content has-text-centered">
+                  <img src="assets/images/mlzero_table_1.png" alt="Main Results Table" width="90%">
+                  <p>Performance comparison between <span style="color: var(--color-ml-blue);"><b>ML</b></span><span style="color: var(--color-zero-green);"><b>Zero</b></span> and several state-of-the-art machine learning and coding agents on our Multimodal AutoML Agent Benchmark. <span style="color: var(--color-ml-blue);"><b>ML</b></span><span style="color: var(--color-zero-green);"><b>Zero</b></span> with <b>def</b>ault configuration achieves a markedly higher success rate (92.0%) compared to all competing agents and delivers solutions of superior quality, as evidenced by its substantially lower average rank (2.42). The <b>8B</b> configuration, which uses LLama 3.1 8B, maintains better performance (45.3% success rate, 5.14 rank average) than other agents despite a significantly reduced model size. In the 24-hour extended run-time experiment (<b>24hrs</b>), <span style="color: var(--color-ml-blue);"><b>ML</b></span><span style="color: var(--color-zero-green);"><b>Zero</b></span> approaches expert-level performance given sufficient computational resources.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <h3 class="title is-4">Implementation Details & Ablation Study</h3>
+          <div class="content has-text-justified">
+            <p>
+              Each agent was assigned a 3-hour time limit per dataset to produce results. It is important to note that only <span style="color: var(--color-ml-blue);"><b>ML</b></span><span style="color: var(--color-zero-green);"><b>Zero</b></span> and Codex CLI operate truly end-to-end, while other agents require varying degrees of preprocessing or postprocessing to function on our benchmark. For example, DS-Agent requires manual code execution, while results from AIDE and AutoKaggle needed manual extraction from working directories.
+            </p>
+            <p>
+              To assess our method without the advantage of its integrated external knowledge, the <b>-ext</b> configuration removes all access to external ML libraries. This configuration yields a 69.3% success rate and a 4.94 average rank, still outperforming all competitors and highlighting the efficiency of <span style="color: var(--color-ml-blue);"><b>ML</b></span><span style="color: var(--color-zero-green);"><b>Zero</b></span>'s other components. We also investigated the contribution of episodic memory through the <b>-epi</b> configuration, which removes episodic memory but retains the LLM's conversation history within the coder agent. This setup achieves an 86.7% success rate with a 2.86 average rank, demonstrating that while episodic memory provides significant benefits, maintaining a coherent conversational context still yields reasonable performance.
+            </p>
+            <p>
+              In contrast, we explored modifying AIDE to access external knowledge, indicated as <b>+ext</b>. While it shows improvement, <span style="color: var(--color-ml-blue);"><b>ML</b></span><span style="color: var(--color-zero-green);"><b>Zero</b></span> continued to outperform it under these comparable conditions. This result underscores that the superior performance of <span style="color: var(--color-ml-blue);"><b>ML</b></span><span style="color: var(--color-zero-green);"><b>Zero</b></span> stems from its overall system design, not merely from the inclusion of episodic memory or external knowledge in isolation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BibTeX -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title is-3 has-text-centered">BibTeX</h2>
+      <pre><code>@article{TBD,
+    author = {TBD},
+    title = {MLZero: A Multi-Agent System for End-to-end Machine Learning Automation},
+    journal = {TBD},
+    year = {2025}
+}</code></pre>
+    </div>
+  </section>
+
+  <section>
+    <div class="section" id="org-banners" style="display:flex">
+      <a href="https://aws.amazon.com/" target="_blank" rel="external">
+        <img class="center-block org-banner" src="assets/logos/amazon.png">
+      </a>
+      <a href="https://github.com/autogluon/autogluon" target="_blank" rel="external">
+        <img class="center-block org-banner" src="assets/logos/autogluon.png">
+      </a>
+    </div>
+  </section>
+
+
+  <!-- License -->
+  <footer class="footer">
+    <!-- <div class="container"> -->
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from <a href="https://octotools.github.io/">OctoTools</a>, licensed under a <a rel="license"
+              href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+              Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- </div> -->
+  </footer>
+
+</body>
+
+  <!-- Back to top button -->
+  <button onclick="topFunction()" id="topButton" title="Go to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+
+  
+</html>
